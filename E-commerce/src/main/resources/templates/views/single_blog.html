@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="/views/layout/layout :: head"></head>
+<body class="single-blog col-2">
+<header th:replace="/views/layout/layout :: header"></header>
+<div class="container">
+  <ul class="breadcrumb">
+      <li><a th:href="@{/home/home}"><i class="fa fa-home"></i></a></li>
+      <li><a th:href="@{/home/blog}">Blog</a></li>
+      <li><a th:href="@{/home/singleBlog}">Singale Post</a></li>
+    </ul>
+  <div class="row">
+
+    <div id="content" class="col-sm-9">
+      <div class="blog1 blog">
+        <div class="blog_img"><img th:src="@{/image/blog/blog_4.jpg}" alt="" /></div>
+        <h4 class="p-name"><a th:href="@{/home/singleBlog}">Image Post Format</a></h4>
+        <ul class="blog-meta">
+          <li><i class="fa fa-clock-o"></i><span class="dt-published">December 23, 2015</span></li>
+          <li><i class="fa fa-comment-o"></i><span>2</span> Comment</li>
+          <li><i class="fa fa-user"></i><span><a rel="author" title="Posts by Admin" href="#">Admin admin</a></span></li>
+        </ul>
+        <p class="p-summary"></p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae provident minus similique porro assumenda illo dolore ducimus vero ipsum illum ipsa velit, deleniti accusantium repellat facilis tempora ab consectetur! Sequi, aperiam, dignissimos! Molestias quidem temporibus, earum deleniti, quae voluptatibus cum, doloremque libero dolorum sapiente neque saepe magnam ullam nisi mollitia itaque voluptas illo pariatur inventore,doloremque libero dolorum sapiente neque saepe magnam ullam nisi mollitia itaque voluptas illo pariatur inventor.</p>
+
+      <div class="blog-comment">
+        <div class="comment-form col-sm-12">
+          <div class="row">
+            <div class="col-sm-12 row">
+              <h4 class="section-title">Leave a Reply</h4>
+              <div class="taberna-line"> <span class="line-inner bg-color"></span> </div>
+            </div>
+            <div class="comment-respond" id="respond">
+
+              <form novalidate class="comment-form" id="commentform" method="post" action="#">
+                <div class="row">
+                  <div class="name col-xs-12 col-sm-12">
+                    <label>Name *</label>
+                    <input type="text" aria-required="true" value="" name="author" id="author">
+                  </div>
+                  <div class="email col-xs-12 col-sm-12">
+                    <label>Email *</label>
+                    <input type="email" aria-required="true" value="" name="email" id="email">
+                  </div>
+                  <div class="comment-form-url col-xs-12">
+                    <label>Url</label>
+                    <input type="text" value="" name="url" id="url">
+                  </div>
+                  <div class="comment-form-comment col-xs-12 col-sm-12">
+                    <label for="comment">Comment</label>
+                    <textarea required rows="8" cols="45" name="comment" id="comment"></textarea>
+                  </div>
+                </div>
+                <p class="form-submit">
+                  <button type="submit" value="send" class="submit taberna-btn bg-color" id="submit" name="submit">send </button>
+                  <input type="hidden" id="comment_post_ID" value="872" name="comment_post_ID" class="taberna-btn bg-color">
+                  <input type="hidden" value="0" id="comment_parent" name="comment_parent" class="taberna-btn bg-color">
+                </p>
+                <p style="display: none;">
+                  <input type="hidden" value="daabc47a44" name="akismet_comment_nonce" id="akismet_comment_nonce">
+                </p>
+                <p style="display: none;"></p>
+                <input type="hidden" value="1452356543102" name="ak_js" id="ak_js">
+              </form>
+            </div>
+            <!-- #respond -->
+
+          </div>
+        </div>
+      </div>
+      <!-- end comment-form -->
+
+    </div>
+    </div>
+<div id="column-right" class="col-sm-3 hidden-xs column-left">
+        <div class="columnblock-title">Categories</div>
+        <div class="blog-categories-block category_block">
+          <div class="list-group"> <a class="list-group-item" href="#">Audio</a> <a class="list-group-item" href="#">Gallery</a> <a class="list-group-item" href="#">Link</a> <a class="list-group-item" href="#">Quote</a> <a class="list-group-item" href="#">Uncategorized</a> <a class="list-group-item last" href="#">Video</a> </div>
+        </div>
+      <div class="productblock-title">Recent Posts</div>
+      <div class="blog-categories-block category_block">
+        <div class="list-group"> <a class="list-group-item" href="#">Gallery Post Format</a> <a class="list-group-item" href="#">Recent Posts</a> <a class="list-group-item" href="
+    #">Gallery Post Format</a> <a class="list-group-item" href="#">Standard Post Format</a> <a class="list-group-item last" href="#">Image Post Format</a> </div>
+      </div>
+
+      <!-- end blog-sidebar -->
+
+    </div>
+    <!-- end blog-sidebar -->
+
+  </div>
+</div>
+<!-- end container -->
+<footer th:replace="/views/layout/layout :: footer_top"></footer>
+<div th:replace="/views/layout/layout :: footer_bot"></div>
+</body>
+</html>
