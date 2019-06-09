@@ -3,10 +3,11 @@
                                          "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
  <session-factory name="">
-  <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-  <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/comercio</property>
+  <!-- <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+  <property name="hibernate.connection.password">root</property>
+  <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/electro</property>
   <property name="hibernate.connection.username">root</property>
-  <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+  <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property> -->
   <mapping class="edu.pe.unsch.entities.Categoria"/>
   <mapping class="edu.pe.unsch.entities.Cliente"/>
   <mapping class="edu.pe.unsch.entities.Compra"/>
