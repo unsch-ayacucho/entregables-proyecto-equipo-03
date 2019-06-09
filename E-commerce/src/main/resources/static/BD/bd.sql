@@ -30,7 +30,10 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `categoria` (
   `id` int(11) NOT NULL,
-  `nombre` varchar(200) DEFAULT NULL
+  `nombre` varchar(200) DEFAULT NULL,
+  `estado` tinyint(1) DEFAULT '1',
+  `id_padre` int(11) DEFAULT NULL
+
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -41,7 +44,7 @@ CREATE TABLE `categoria` (
 
 CREATE TABLE `cliente` (
   `id` int(11) NOT NULL,
-  `idUsuario` int(11) DEFAULT NULL,
+  `id_usuario` int(11) DEFAULT NULL,
   `telefono` varchar(255) DEFAULT NULL,
   `direccion` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -54,11 +57,11 @@ CREATE TABLE `cliente` (
 
 CREATE TABLE `compra` (
   `id` int(11) NOT NULL,
-  `idCliente` int(11) DEFAULT NULL,
-  `idCupon` int(11) DEFAULT NULL,
-  `idEstadoProductoCompra` int(11) DEFAULT NULL,
+  `id_cliente` int(11) DEFAULT NULL,
+  `id_cupon` int(11) DEFAULT NULL,
+  `id_estado_producto_compra` int(11) DEFAULT NULL,
   `creacion` datetime DEFAULT NULL,
-  `idMetodoPago` int(11) DEFAULT NULL
+  `id_metodo_pago` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -71,12 +74,12 @@ CREATE TABLE `cupon` (
   `id` int(11) NOT NULL,
   `nombre` varchar(200) DEFAULT NULL,
   `descripcion` varchar(1000) DEFAULT NULL,
-  `idProducto` int(11) DEFAULT NULL,
+  `id_producto` int(11) DEFAULT NULL,
   `valor` double DEFAULT NULL,
   `tipo` int(11) DEFAULT '1',
   `estado` tinyint(1) DEFAULT '1',
-  `tComienzo` date DEFAULT NULL,
-  `tFinal` date DEFAULT NULL,
+  `t_comienzo` date DEFAULT NULL,
+  `t_final` date DEFAULT NULL,
   `creacion` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -88,8 +91,8 @@ CREATE TABLE `cupon` (
 
 CREATE TABLE `detallecompra` (
   `id` int(11) NOT NULL,
-  `idCompra` int(11) DEFAULT NULL,
-  `idProducto` int(11) DEFAULT NULL,
+  `id_compra` int(11) DEFAULT NULL,
+  `id_producto` int(11) DEFAULT NULL,
   `cantidad` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -135,7 +138,7 @@ CREATE TABLE `producto` (
   `creacion` datetime DEFAULT NULL,
   `ordenado` datetime DEFAULT NULL,
   `precio` float DEFAULT NULL,
-  `idCategoria` int(11) DEFAULT NULL
+  `id_categoria` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -147,8 +150,8 @@ CREATE TABLE `producto` (
 CREATE TABLE `usuario` (
   `id` int(11) NOT NULL,
   `nombre` varchar(50) DEFAULT NULL,
-  `apPaterno` varchar(50) DEFAULT NULL,
-  `apMaterno` varchar(50) DEFAULT NULL,
+  `ap_paterno` varchar(50) DEFAULT NULL,
+  `ap_materno` varchar(50) DEFAULT NULL,
   `username` varchar(50) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `password` varchar(60) DEFAULT NULL,
@@ -172,32 +175,32 @@ ALTER TABLE `categoria`
 --
 ALTER TABLE `cliente`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `idUsuario` (`idUsuario`);
+  ADD KEY `id_usuario` (`id_usuario`);
 
 --
 -- Indices de la tabla `compra`
 --
 ALTER TABLE `compra`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `idMetodoPago` (`idMetodoPago`),
-  ADD KEY `idCupon` (`idCupon`),
-  ADD KEY `idCliente` (`idCliente`),
-  ADD KEY `idEstadoProductoCompra` (`idEstadoProductoCompra`);
+  ADD KEY `id_metodo_pago` (`id_metodo_pago`),
+  ADD KEY `id_cupon` (`id_cupon`),
+  ADD KEY `id_cliente` (`id_cliente`),
+  ADD KEY `id_estado_producto_compra` (`id_estado_producto_compra`);
 
 --
 -- Indices de la tabla `cupon`
 --
 ALTER TABLE `cupon`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `idProducto` (`idProducto`);
+  ADD KEY `id_producto` (`id_producto`);
 
 --
 -- Indices de la tabla `detallecompra`
 --
 ALTER TABLE `detallecompra`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `idCompra` (`idCompra`),
-  ADD KEY `idProducto` (`idProducto`);
+  ADD KEY `id_compra` (`id_compra`),
+  ADD KEY `id_producto` (`id_producto`);
 
 --
 -- Indices de la tabla `estadoproductocompra`
@@ -216,7 +219,7 @@ ALTER TABLE `metodopago`
 --
 ALTER TABLE `producto`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `idCategoria` (`idCategoria`);
+  ADD KEY `id_categoria` (`id_categoria`);
 
 --
 -- Indices de la tabla `usuario`
@@ -290,35 +293,35 @@ ALTER TABLE `usuario`
 -- Filtros para la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  ADD CONSTRAINT `cliente_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`id`);
+  ADD CONSTRAINT `cliente_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`);
 
 --
 -- Filtros para la tabla `compra`
 --
 ALTER TABLE `compra`
-  ADD CONSTRAINT `compra_ibfk_1` FOREIGN KEY (`idMetodoPago`) REFERENCES `metodopago` (`id`),
-  ADD CONSTRAINT `compra_ibfk_2` FOREIGN KEY (`idCupon`) REFERENCES `cupon` (`id`),
-  ADD CONSTRAINT `compra_ibfk_3` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`id`),
-  ADD CONSTRAINT `compra_ibfk_4` FOREIGN KEY (`idEstadoProductoCompra`) REFERENCES `estadoproductocompra` (`id`);
+  ADD CONSTRAINT `compra_ibfk_1` FOREIGN KEY (`id_metodo_pago`) REFERENCES `metodopago` (`id`),
+  ADD CONSTRAINT `compra_ibfk_2` FOREIGN KEY (`id_cupon`) REFERENCES `cupon` (`id`),
+  ADD CONSTRAINT `compra_ibfk_3` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`),
+  ADD CONSTRAINT `compra_ibfk_4` FOREIGN KEY (`id_estado_producto_compra`) REFERENCES `estadoproductocompra` (`id`);
 
 --
 -- Filtros para la tabla `cupon`
 --
 ALTER TABLE `cupon`
-  ADD CONSTRAINT `cupon_ibfk_1` FOREIGN KEY (`idProducto`) REFERENCES `producto` (`id`);
+  ADD CONSTRAINT `cupon_ibfk_1` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id`);
 
 --
 -- Filtros para la tabla `detallecompra`
 --
 ALTER TABLE `detallecompra`
-  ADD CONSTRAINT `detallecompra_ibfk_1` FOREIGN KEY (`idCompra`) REFERENCES `compra` (`id`),
-  ADD CONSTRAINT `detallecompra_ibfk_2` FOREIGN KEY (`idProducto`) REFERENCES `producto` (`id`);
+  ADD CONSTRAINT `detallecompra_ibfk_1` FOREIGN KEY (`id_compra`) REFERENCES `compra` (`id`),
+  ADD CONSTRAINT `detallecompra_ibfk_2` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id`);
 
 --
 -- Filtros para la tabla `producto`
 --
 ALTER TABLE `producto`
-  ADD CONSTRAINT `producto_ibfk_1` FOREIGN KEY (`idCategoria`) REFERENCES `categoria` (`id`);
+  ADD CONSTRAINT `producto_ibfk_1` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
