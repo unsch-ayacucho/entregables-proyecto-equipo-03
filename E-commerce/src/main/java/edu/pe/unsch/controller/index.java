@@ -5,70 +5,70 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/home")
+
 public class index {
-	@GetMapping("/home")
+	@GetMapping({"/","/home"})
 	public String home(){
-		return "views/index";
+		return "views/public/index";
 	}
 	
 	@GetMapping("/about")
 	public String about(){
-		return "views/about";
+		return "views/public/about";
 	}
 	
 	@GetMapping("/afiliacion")
 	public String afiliacion(){
-		return "views/afiliacion";
+		return "views/public/afiliacion";
 	}
 	
 	@GetMapping("/blog")
 	public String blog(){
-		return "views/blog";
+		return "views/public/blog";
 	}
 	
 	@GetMapping("/cart")
 	public String cart(){
-		return "views/cart";
+		return "views/public/cart";
 	}
 	
 	@GetMapping("/categoria")
 	public String categoria(){
-		return "views/categoria";
+		return "views/public/producto/categoria";
 	}
 	
 	@GetMapping("/checkout")
 	public String checkout(){
-		return "views/checkout";
+		return "views/public/checkout";
 	}
 	
 	@GetMapping("/contact")
 	public String contact(){
-		return "views/contact";
+		return "views/public/contact";
 	}
 	
 	@GetMapping("/forgetPassword")
 	public String forgetPassword(){
-		return "views/forgetPassword";
+		return "views/public/forgetPassword";
 	}
 	
 	@GetMapping("/login")
 	public String login(){
-		return "views/login";
+		return "views/public/login";
 	}
 	
 	@GetMapping("/producto")
 	public String producto() {
-		return "views/producto";
+		return "views/public/producto/producto";
 	}
 	
 	@GetMapping("/register")
 	public String register() {
-		return "views/register";
+		return "views/public/register";
 	}
 	
 	@GetMapping("/singleBlog")
 	public String singleBlog() {
-		return "views/single_blog";
+		return "views/public/single_blog";
 	}
 }

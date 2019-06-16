@@ -22,4 +22,10 @@ public class CategoriaServiceImpl implements CategoriaService{
 		return categoriaDao.findAll();
 	}
 
+	@Override
+	public Categoria find(Integer id) {
+		// TODO Auto-generated method stub
+		return categoriaDao.find(id);
+	}
+
 }

@@ -31,4 +31,10 @@ public class CategoriaDaoImpl implements CategoriaDao{
 		
 	}
 
+	@Override
+	public Categoria find(Integer id) {
+		// TODO Auto-generated method stub
+		return (Categoria) entityManager.find(Categoria.class, id);
+	}
+
 }

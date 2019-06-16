@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org/">
 <head th:fragment="head">
-<title>Mo & Chi</title>
+<title>	Electronica Digital</title>
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="e-commerce site well design with responsive view." />
@@ -62,16 +62,16 @@
           <div class="top-right pull-right">
             <div id="top-links" class="nav pull-right">
               <ul class="list-inline">
-                <li class="dropdown account"><a href="#" title="My Account" class="  dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-user"></i><span>My Account</span> <span class="caret"></span></a>
+                <li class="dropdown account"><a href="#" title="My Account" class="  dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-user"></i><span>My cuenta</span> <span class="caret"></span></a>
                   <ul class="dropdown-menu dropdown-menu-right">
-                    <li><a th:href="@{/home/register}">Register</a></li>
-                    <li><a th:href="@{/home/login}">Login</a></li>
+                    <li><a th:href="@{/home/register}">Registrarse</a></li>
+                    <li><a th:href="@{/home/login}">Entrar</a></li>
                   </ul>
                 </li>
-                <li><a href="#" id="wishlist-total" title="Wish List (0)"><i class="fa fa-heart"></i><span>Wish List</span><span> (0)</span></a></li>
+                <li><a href="#" id="wishlist-total" title="Wish List (0)"><i class="fa fa-heart"></i><span>Lista de Deseos</span><span> (0)</span></a></li>
               </ul>
               <div class="search-box">
-                <input class="input-text" placeholder="Search By Products.." type="text">
+                <input class="input-text" placeholder="Busqueda de productos.." type="text">
                 <button class="search-btn"><i class="fa fa-search"></i></button>
               </div>
             </div>
@@ -86,7 +86,7 @@
         <div class="shipping">
           <div class="shipping-img"></div>
           <div class="shipping-text">(+91) 000-1233<br>
-            <span class="shipping-detail">24/7 Online Support</span></div>
+            <span class="shipping-detail">24/7 Soporte en linea</span></div>
         </div>
       </div>
       <div class="col-sm-4 col-xs-12 header-middle">
@@ -96,7 +96,7 @@
       </div>
       <div class="col-sm-4 col-xs-12 header-right">
         <div id="cart" class="btn-group btn-block">
-          <button type="button" class="btn btn-inverse btn-block btn-lg dropdown-toggle cart-dropdown-button"> <span id="cart-total"><span class="cart-title">Shopping Cart</span><br>
+          <button type="button" class="btn btn-inverse btn-block btn-lg dropdown-toggle cart-dropdown-button"> <span id="cart-total"><span class="cart-title">Carrito de Compras</span><br>
           0 item(s) - $0.00</span> </button>
           <ul class="dropdown-menu pull-right cart-dropdown-menu">
             <li>
@@ -150,15 +150,15 @@
           <ul class="main-navigation">
             <li><a th:href="@{/home/home}"   class="parent"  >Home</a> </li>
             <th:block th:each="i:${categories}">
-           	  <li><a href="#" th:text="${i.nombre}"></a>
+           	  <li><a th:href="@{'/producto/categoria/'+${i.id}}" th:text="${i.nombre}"></a>
            	    <th:block th:if="${i.categories.size()} > 0">
            	      <ul>
            	    	<th:block th:each="x:${i.categories}">
-	           	    	<li><a href="#" th:text="${x.nombre}"></a>
+	           	    	<li><a th:href="@{'/producto/categoria/'+${x.id}}" th:text="${x.nombre}"></a>
 	           	    	<th:block th:if="${x.categories.size()} > 0">
 	           	    	<ul>
 	           	    	<th:block th:each="y:${x.categories}">
-	           	    	<li><a href="#" th:text="${y.nombre}"></a></li>
+	           	    	<li><a th:href="@{'/producto/categoria/'+${y.id}}" ><span th:text="${y.nombre}"></span></a></li>
 	           	    	</th:block>
 	           	    	</ul>
 	           	    	</th:block>
@@ -205,45 +205,42 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-3 footer-block">
-        <h5 class="footer-title">Information</h5>
+        <h5 class="footer-title">Informacion</h5>
         <ul class="list-unstyled ul-wrapper">
-          <li><a th:href="@{/home/about}">About Us</a></li>
-          <li><a th:href="@{/home/checkout}">Delivery Information</a></li>
-          <li><a href="#">Privacy Policy</a></li>
-          <li><a href="#">Terms &amp; Conditions</a></li>
-          <li><a href="#">Returns</a></li>
-          <li><a href="#">Site Map</a></li>
-          <li><a href="#">Wish List</a></li>
+       	  <li><a href="#">Lista de deseos</a></li>
+      	  <li><a href="#">Encuentranos</a></li>
+      	  <li><a href="#">Politicas y publicidad</a></li>
+          <li><a th:href="@{/home/about}">Sobre nosotros</a></li>
+          <li><a href="#">Terminos &amp; Condiciones</a></li>
         </ul>
       </div>
       <div class="col-sm-3 footer-block">
-        <h5 class="footer-title">Why Choose</h5>
+        <h5 class="footer-title">¿Por que escogernos?</h5>
         <ul class="list-unstyled ul-wrapper">
-          <li><a th:href="@{/home/contact}">Contact Us</a></li>
-          <li><a href="#">Product Recall</a></li>
-          <li><a href="#">Gift Vouchers</a></li>
-          <li><a href="#">Returns and Exchanges</a></li>
-          <li><a href="#">Shipping Options</a></li>
-          <li><a href="#">Help & FAQs</a></li>
-          <li><a href="#">Sale Only Today</a></li>
+          <li><a th:href="@{/home/contact}">Contactanos</a></li>
+          <li><a href="#">Retirar productos</a></li>
+          <li><a href="#">Vales de regalos</a></li>
+          <li><a href="#">Devolucion y cambios</a></li>
+          <li><a href="#">Opciones de envio</a></li>
+          <li><a href="#">Ayuda y preguntas frecuentes</a></li>
+          <li><a href="#">Venta solo por hoy</a></li>
         </ul>
       </div>
       <div class="col-sm-3 footer-block">
-        <h5 class="footer-title">My Account</h5>
+        <h5 class="footer-title">Mi cuenta</h5>
         <ul class="list-unstyled ul-wrapper">
-          <li><a href="#">Sign in</a></li>
-          <li><a th:href="@{/home/gift}">Gift Vouchers</a></li>
-          <li><a th:href="@{/home/afiliacion}">Affiliates</a></li>
-          <li><a href="#">View Cart</a></li>
-          <li><a href="#">Checkout</a></li>
-          <li><a href="#">Track My Order</a></li>
-          <li><a href="#">Help</a></li>
+          <li><a href="#">Registrarse</a></li>
+          <li><a th:href="@{/home/afiliacion}">Afilicacion</a></li>
+          <li><a href="#">Ver carrito</a></li>
+          <li><a href="#">Revisar</a></li>
+          <li><a href="#">Rastrear mi orden</a></li>
+          <li><a href="#">Ayuda</a></li>
         </ul>
       </div>
       <div class="col-sm-3 footer-block">
         <div class="content_footercms_right">
           <div class="footer-contact">
-            <h5 class="contact-title footer-title">Contact Us</h5>
+            <h5 class="contact-title footer-title">Contactanos</h5>
             <ul class="ul-wrapper">
               <li><i class="fa fa-map-marker"></i><span class="location2"> Warehouse & Offices,<br>
                 12345 Street name, California<br>
@@ -260,10 +257,10 @@
         <div class="col-sm-7">
           <div class="newslatter">
             <form>
-              <h5>Sign up for our Newsletter</h5>
+              <h5>REGISTRATE EN NUESTRO BOLETIN DE NOTICIAS</h5>
               <div class="input-group">
-                <input type="text" class=" form-control" placeholder="Your-email@website.com">
-                <button type="submit" value="Sign up" class="btn btn-large btn-primary">Subscribe</button>
+                <input type="text" class=" form-control" placeholder="example@gmail.com">
+                <button type="submit" value="Sign up" class="btn btn-large btn-primary">Subscribete</button>
               </div>
             </form>
           </div>
@@ -286,7 +283,7 @@
   <a id="scrollup">Scroll</a> </footer>
 <div class="footer-bottom" th:fragment="footer_bot">
   <div class="container">
-    <div class="copyright">Powered By &nbsp;<a class="yourstore" href="http://www.lionode.com/">lionode &copy; 2017 </a> </div>
+    <div class="copyright">Desarrollado &nbsp;<a class="yourstore" href="#">leoStudio &copy; 2019 </a> </div>
     <div class="footer-bottom-cms">
       <div class="footer-payment">
         <ul>

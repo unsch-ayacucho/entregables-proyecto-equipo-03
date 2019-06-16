@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="https://www.thymeleaf.org/">
-<head th:replace="/views/layout/layout :: head"></head>
+<head th:replace="/views/public/layout/layout :: head"></head>
 <body class="account-login col-2">
-<header th:replace="/views/layout/layout :: header"></header>
+<header th:replace="/views/public/layout/layout :: header"></header>
 <div class="container">
   <ul class="breadcrumb">
     <li><a th:href="@{/home/home}"><i class="fa fa-home"></i></a></li>
@@ -48,7 +48,7 @@
     </div>
   </div>
 </div>
-<footer th:replace="/views/layout/layout :: footer_top"></footer>
-<div th:replace="/views/layout/layout :: footer_bot"></div>
+<footer th:replace="/views/public/layout/layout :: footer_top"></footer>
+<div th:replace="/views/public/layout/layout :: footer_bot"></div>
 </body>
 </html>
