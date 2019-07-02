@@ -1,5 +1,5 @@
 package edu.pe.unsch.entities;
-// Generated 8/06/2019 07:46:25 PM by Hibernate Tools 5.1.7.Final
+// Generated 25/06/2019 10:17:00 PM by Hibernate Tools 5.1.7.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -36,6 +36,7 @@ public class Producto implements java.io.Serializable {
 	private Date creacion;
 	private Date ordenado;
 	private Float precio;
+	private Boolean oferta;
 	private Set<Detallecompra> detallecompras = new HashSet<Detallecompra>(0);
 	private Set<Cupon> cupons = new HashSet<Cupon>(0);
 
@@ -44,7 +45,7 @@ public class Producto implements java.io.Serializable {
 
 	public Producto(Categoria categoria, String nombre, String codigo, String descripcion, String imagen,
 			Boolean destacado, Boolean publico, Boolean existencia, Date creacion, Date ordenado, Float precio,
-			Set<Detallecompra> detallecompras, Set<Cupon> cupons) {
+			Boolean oferta, Set<Detallecompra> detallecompras, Set<Cupon> cupons) {
 		this.categoria = categoria;
 		this.nombre = nombre;
 		this.codigo = codigo;
@@ -56,6 +57,7 @@ public class Producto implements java.io.Serializable {
 		this.creacion = creacion;
 		this.ordenado = ordenado;
 		this.precio = precio;
+		this.oferta = oferta;
 		this.detallecompras = detallecompras;
 		this.cupons = cupons;
 	}
@@ -172,6 +174,15 @@ public class Producto implements java.io.Serializable {
 
 	public void setPrecio(Float precio) {
 		this.precio = precio;
+	}
+
+	@Column(name = "oferta")
+	public Boolean getOferta() {
+		return this.oferta;
+	}
+
+	public void setOferta(Boolean oferta) {
+		this.oferta = oferta;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "producto")

@@ -1,14 +1,24 @@
 package edu.pe.unsch.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import edu.pe.unsch.service.ProductoService;
 
 @Controller
 
 public class index {
+	
+	@Autowired
+	ProductoService productoService;
+	
 	@GetMapping({"/","/home"})
-	public String home(){
+	public String home(Model model){
+		model.addAttribute("destacado",productoService.featured(5));
+		model.addAttribute("oferta",productoService.lasted(6));
 		return "views/public/index";
 	}
 	
