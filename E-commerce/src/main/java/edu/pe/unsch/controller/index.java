@@ -37,10 +37,6 @@ public class index {
 		return "views/public/blog";
 	}
 	
-	@GetMapping("/cart")
-	public String cart(){
-		return "views/public/cart";
-	}
 	
 	@GetMapping("/categoria")
 	public String categoria(){

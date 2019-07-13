@@ -91,24 +91,27 @@
       </div>
       <div class="col-sm-4 col-xs-12 header-middle">
         <div class="header-middle-top">
-          <div id="logo"> <a th:href="@{/home/home}"><img th:src="@{/image/logo.png}" title="E-Commerce" alt="E-Commerce" class="img-responsive" /></a> </div>
+          <div id="logo"> <a th:href="@{/}"><img th:src="@{/image/logo.png}" title="E-Commerce" alt="E-Commerce" class="img-responsive" /></a> </div>
         </div>
       </div>
       <div class="col-sm-4 col-xs-12 header-right">
         <div id="cart" class="btn-group btn-block">
           <button type="button" class="btn btn-inverse btn-block btn-lg dropdown-toggle cart-dropdown-button"> <span id="cart-total"><span class="cart-title">Carrito de Compras</span><br>
-          0 item(s) - $0.00</span> </button>
+		<span th:text="*{session.cart.size()}?: '(0)'"></span><text>&nbsp;&nbsp; </text> <span id="total2" ></span></span> </button>
           <ul class="dropdown-menu pull-right cart-dropdown-menu">
             <li>
               <table class="table table-striped">
                 <tbody>
+                <th:block th:each="item, i : ${session.cart}">
                   <tr>
                     <td class="text-center"><a href="#"><img class="img-thumbnail" title="lorem ippsum dolor dummy" alt="lorem ippsum dolor dummy" th:src="@{/image/product/7product50x59.jpg}"></a></td>
-                    <td class="text-left"><a href="#">lorem ippsum dolor dummy</a></td>
-                    <td class="text-right">x 1</td>
-                    <td class="text-right">$254.00</td>
-                    <td class="text-center"><button class="btn btn-danger btn-xs" title="Remove" type="button"><i class="fa fa-times"></i></button></td>
+                    <td class="text-left"><a href="#"><span th:text="${item.producto.nombre}"></span></a></td>
+                    <td class="text-right"><span th:text="${item.cantidad}" ></span></td>
+                    <td class="text-right"><span th:text="${item.producto.precio}"></span></td>
+                    <td class="text-center"><a th:href="@{'/cart/delete/'+ ${i.index}}"  class="btn btn-danger btn-xs" title="Remove" type="button"><i class="fa fa-times" ></i></a></td>
+                    <td  class="text-right">$<span  th:text="${#numbers.formatDecimal(item.producto.precio*item.cantidad,0,2,'POINT')}"></span></td>
                   </tr>
+                  </th:block>
                 </tbody>
               </table>
             </li>
@@ -118,24 +121,42 @@
                   <tbody>
                     <tr>
                       <td class="text-right"><strong>Sub-Total</strong></td>
-                      <td class="text-right">$210.00</td>
+                      <td id="total" class="text-right"></td>
                     </tr>
                     <tr>
-                      <td class="text-right"><strong>Eco Tax (-2.00)</strong></td>
-                      <td class="text-right">$2.00</td>
+                      <td class="text-right"><strong>Eco Tax</strong></td>
+                      <td class="text-right">$0.00</td>
                     </tr>
                     <tr>
-                      <td class="text-right"><strong>VAT (20%)</strong></td>
-                      <td class="text-right">$42.00</td>
+                      <td class="text-right"><strong>VAT </strong></td>
+                      <td class="text-right">$0.00</td>
                     </tr>
                     <tr>
                       <td class="text-right"><strong>Total</strong></td>
-                      <td class="text-right">$254.00</td>
+                      <td id="total1" class="text-right"></td>
                     </tr>
                   </tbody>
                 </table>
                 <p class="text-right"> <span class="btn-viewcart"><a th:href="@{/home/cart}"><strong><i class="fa fa-shopping-cart"></i> View Cart</strong></a></span> <span class="btn-checkout"><a th:href="@{/home/checkout}"><strong><i class="fa fa-share"></i> Checkout</strong></a></span> </p>
               </div>
+              <script type="text/javascript">
+				var sum = 0;
+				var conDecimal=0;
+				$("#cart tr").not(':first+1').not(':last+1').each(function() {
+					// extrae el subtotal de la tabla
+					var subtotal = $(this).find('td:eq(5)').text();
+					console.log(subtotal)
+					// extrae sólo la parte numérica
+					var num = Number(subtotal.replace(/[^0-9\.]+/g,""));
+					sum += num;
+					conDecimal = sum.toFixed(2);
+					console.log(conDecimal)
+				});
+				$('#total').html("$"+conDecimal);
+				$('#total1').html("$"+conDecimal);
+				$('#total2').html("$"+conDecimal);
+				//document.getElementById("total");
+	  		</script>
             </li>
           </ul>
         </div>
@@ -148,7 +169,7 @@
         </div>
         <div class="navbar-collapse">
           <ul class="main-navigation">
-            <li><a th:href="@{/home/home}"   class="parent"  >Home</a> </li>
+            <li><a th:href="@{/}"   class="parent"  >Home</a> </li>
             <th:block th:each="i:${categories}">
            	  <li><a th:href="@{'/producto/categoria/'+${i.id}}" th:text="${i.nombre}"></a>
            	    <th:block th:if="${i.categories.size()} > 0">

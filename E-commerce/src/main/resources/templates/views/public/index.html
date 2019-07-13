@@ -34,7 +34,7 @@
                   <div class="image product-imageblock"> <a th:href="@{'/producto/detalle/' + ${producto.id}}"><img th:src="@{'/image/product/'+${producto.imagen}}"  alt="lorem ippsum dolor dummy" title="lorem ippsum dolor dummy" class="img-responsive" /> </a>
                     <div class="button-group">
                       <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List" ><i class="fa fa-heart-o"></i></button>
-                      <button type="button" class="addtocart-btn" >Add To Cart</button>
+                      <a type="button" class="addtocart-btn" th:href="@{'/cart/buy/' + ${producto.id}}">Add To Cart</a>
                       <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product" ><i class="fa fa-exchange"></i></button>
                     </div>
                   </div>
@@ -45,7 +45,7 @@
                   </div>
                   <div class="button-group">
                     <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List" ><i class="fa fa-heart-o"></i></button>
-                    <button type="button" class="addtocart-btn" >Add To Cart</button>
+                    <a type="button" class="addtocart-btn" th:href="@{'/cart/buy/' + ${producto.id}}">Add To Cart</a>
                     <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product" ><i class="fa fa-exchange"></i></button>
                   </div>
                 </div>
