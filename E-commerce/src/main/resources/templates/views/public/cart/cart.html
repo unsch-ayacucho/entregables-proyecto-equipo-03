@@ -117,7 +117,7 @@
       <h1>Shopping Cart                &nbsp;(10.00kg) </h1>
       <form enctype="multipart/form-data" method="post" action="#">
         <div class="table-responsive">
-          <table class="table table-bordered">
+          <table class="table table-bordered" id="cart">
             <thead>
               <tr>
                 <td class="text-center">Image</td>
@@ -125,27 +125,65 @@
                 <td class="text-left">Model</td>
                 <td class="text-left">Quantity</td>
                 <td class="text-right">Unit Price</td>
-                <td class="text-right">Total</td>
+                <td class="text-right">total</td>
               </tr>
             </thead>
             <tbody>
+            <th:block th:each="item, i : ${session.cart}">
               <tr>
                 <td class="text-center"><a th:href="@{/home/producto}"><img class="img-thumbnail" title="women's New Wine is an alcoholic" alt="women's New Wine is an alcoholic" th:src="@{/image/product/2product50x59.jpg}"></a></td>
-                <td class="text-left"><a th:href="@{/home/producto}">women's New Wine is an alcoholic</a></td>
-                <td class="text-left">product 11</td>
+                <td class="text-left"><a th:href="@{/home/producto}"><span th:text="${item.producto.nombre}"></span></a></td>
+                <td class="text-left"><span th:text="${item.producto.nombre}"></span></td>
                 <td class="text-left"><div style="max-width: 200px;" class="input-group btn-block">
-                    <input type="text" class="form-control quantity" size="1" value="1" name="quantity">
+                    <text class="form-control quantity"  th:text="${item.cantidad}" ></text>
                     <span class="input-group-btn">
-                    <button class="btn btn-primary" title="" data-toggle="tooltip" type="submit" data-original-title="Update"><i class="fa fa-refresh"></i></button>
-                    <button  class="btn btn-danger" title="" data-toggle="tooltip" type="button" data-original-title="Remove"><i class="fa fa-times-circle"></i></button>
+                    
+                    <a type="button" th:href="@{'/cart/delete/'+ ${i.index}}" class="btn btn-danger" title="" data-toggle="tooltip"  data-original-title="Remove"><i class="fa fa-times-circle"></i> </a>
                     </span></div></td>
-                <td class="text-right">$254.00</td>
-                <td class="text-right">$254.00</td>
+                <td  class="text-right">$<span id="precioP" name="precioP" th:text="${item.producto.precio}"></span></td>
+                <td  class="text-right">$<span  th:text="${#numbers.formatDecimal(item.producto.precio*item.cantidad,0,2,'POINT')}"></span></td>
               </tr>
+             </th:block>
             </tbody>
           </table>
         </div>
       </form>
+      <!-- <script type="text/javascript">
+      	var cantidad = $('#cantidadP').val();
+		var precio = $('#precioP').text();
+		//console.log(cantidad);
+		//console.log(precio);
+		var cantidadC=parseInt(cantidad, 10);
+		var precioC=parseFloat(precio, 10);
+		var total=cantidadC*precioC;
+		var totalComvertido = "$"+total.toString();
+		//console.log("$"+totalComvertido);
+		$('#totalP').html(totalComvertido);
+		$("#cantidadP").keyup(function(){
+			var cantidad = $('#cantidadP').val();
+			var precio = $('#precioP').text();
+			//console.log(cantidad);
+			//console.log(precio);
+			var cantidadC=parseInt(cantidad, 10);
+			var precioC=parseFloat(precio, 10);
+			var total=cantidadC*precioC;
+			var totalComvertido = "$"+total.toString();
+			$('#totalP').html(totalComvertido);
+		}); 
+		///	function actualizarPrecio(){
+			//	var cantidad = $('#cantidadP').val();
+			//	var precio = $('#precioP').text();
+				//console.log(cantidad);
+				//	console.log(precio);
+				//var cantidadC=parseInt(cantidad, 10);
+				//var precioC=parseFloat(precio, 10);
+				//var total=cantidadC*precioC;
+				//var totalComvertido = "$"+total.toString();
+				//console.log("$"+totalComvertido);
+				//	$('#totalP').html(totalComvertido);
+			//}
+		</script> -->
+  
       <h2>What would you like to do next?</h2>
       <p>Choose if you have a discount code or reward points you want to use or would like to estimate your delivery cost.</p>
       <div id="accordion" class="panel-group">
@@ -582,24 +620,41 @@
             <tbody>
               <tr>
                 <td class="text-right"><strong>Sub-Total:</strong></td>
-                <td class="text-right">$210.00</td>
+                <td id="total" class="text-right"></td>
               </tr>
               <tr>
-                <td class="text-right"><strong>Eco Tax (-2.00):</strong></td>
-                <td class="text-right">$2.00</td>
+                <td class="text-right"><strong>Eco Tax:</strong></td>
+                <td class="text-right">$0.00</td>
               </tr>
               <tr>
-                <td class="text-right"><strong>VAT (20%):</strong></td>
-                <td class="text-right">$42.00</td>
+                <td class="text-right"><strong>VAT:</strong></td>
+                <td class="text-right">$0.00</td>
               </tr>
               <tr>
                 <td class="text-right"><strong>Total:</strong></td>
-                <td class="text-right">$254.00</td>
+                <td  id="total1" class="text-right"></td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
+        <script type="text/javascript">
+		var sum = 0;
+		var conDecimal=0;
+		$("#cart tr").not(':first+1').not(':last+1').each(function() {
+			// extrae el subtotal de la tabla
+			var subtotal = $(this).find('td:eq(5)').text();
+			console.log(subtotal)
+			// extrae sólo la parte numérica
+			var num = Number(subtotal.replace(/[^0-9\.]+/g,""));
+			sum += num;
+			conDecimal = sum.toFixed(2);
+			console.log(conDecimal)
+		});
+		$('#total').html("$"+conDecimal);
+		$('#total1').html("$"+conDecimal);
+		//document.getElementById("total");
+	  </script>
       <div class="buttons">
         <div class="pull-left"><a class="btn btn-default" th:href="@{/home/home}">Continue Shopping</a></div>
         <div class="pull-right"><a class="btn btn-primary" th:href="@{/home/checkout}">Checkout</a></div>

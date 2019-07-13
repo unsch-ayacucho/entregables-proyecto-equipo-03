@@ -36,7 +36,7 @@ public class index {
 	public String blog(){
 		return "views/public/blog";
 	}
-	
+	 
 	
 	@GetMapping("/categoria")
 	public String categoria(){
