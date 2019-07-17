@@ -60,7 +60,7 @@ public class index {
 	
 	@GetMapping("/login")
 	public String login(){
-		return "views/public/login";
+		return "views/public/Account/login";
 	}
 	
 	@GetMapping("/producto")
