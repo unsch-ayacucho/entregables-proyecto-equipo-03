@@ -29,4 +29,10 @@ public class AccountServiceImpl implements AccountService{
 		return accountDao.login(email, password);
 	}
 
+	@Override
+	public Usuario find(String email) {
+		// TODO Auto-generated method stub
+		return accountDao.find(email);
+	}
+
 }

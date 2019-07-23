@@ -37,4 +37,13 @@ public class AccountDaoImpl implements AccountDao {
 		}
 	}
 
+	@Override
+	public Usuario find(String email) {
+		// TODO Auto-generated method stub
+		return (Usuario) entityManager.createQuery(" from Usuario "
+				+ " where email =: email ")
+				.setParameter("email", email)
+				.getSingleResult();
+	}
+
 }

@@ -1,5 +1,5 @@
 package edu.pe.unsch.entities;
-// Generated 25/06/2019 10:17:00 PM by Hibernate Tools 5.1.7.Final
+// Generated 22/07/2019 11:51:13 PM by Hibernate Tools 5.1.7.Final
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,14 +22,16 @@ public class Detallecompra implements java.io.Serializable {
 	private Compra compra;
 	private Producto producto;
 	private Integer cantidad;
+	private Float precio;
 
 	public Detallecompra() {
 	}
 
-	public Detallecompra(Compra compra, Producto producto, Integer cantidad) {
+	public Detallecompra(Compra compra, Producto producto, Integer cantidad, Float precio) {
 		this.compra = compra;
 		this.producto = producto;
 		this.cantidad = cantidad;
+		this.precio = precio;
 	}
 
 	@Id
@@ -71,6 +73,15 @@ public class Detallecompra implements java.io.Serializable {
 
 	public void setCantidad(Integer cantidad) {
 		this.cantidad = cantidad;
+	}
+
+	@Column(name = "precio", precision = 6)
+	public Float getPrecio() {
+		return this.precio;
+	}
+
+	public void setPrecio(Float precio) {
+		this.precio = precio;
 	}
 
 }

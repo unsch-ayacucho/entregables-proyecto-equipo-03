@@ -1,5 +1,5 @@
 package edu.pe.unsch.entities;
-// Generated 25/06/2019 10:17:00 PM by Hibernate Tools 5.1.7.Final
+// Generated 22/07/2019 11:51:13 PM by Hibernate Tools 5.1.7.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -32,13 +32,13 @@ public class Usuario implements java.io.Serializable {
 	private Boolean estado;
 	private Boolean admin;
 	private Date creacion;
-	private Set<Cliente> clientes = new HashSet<Cliente>(0);
+	private Set<Compra> compras = new HashSet<Compra>(0);
 
 	public Usuario() {
 	}
 
 	public Usuario(String nombre, String apPaterno, String apMaterno, String username, String email, String password,
-			Boolean estado, Boolean admin, Date creacion, Set<Cliente> clientes) {
+			Boolean estado, Boolean admin, Date creacion, Set<Compra> compras) {
 		this.nombre = nombre;
 		this.apPaterno = apPaterno;
 		this.apMaterno = apMaterno;
@@ -48,7 +48,7 @@ public class Usuario implements java.io.Serializable {
 		this.estado = estado;
 		this.admin = admin;
 		this.creacion = creacion;
-		this.clientes = clientes;
+		this.compras = compras;
 	}
 
 	@Id
@@ -146,12 +146,12 @@ public class Usuario implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario")
-	public Set<Cliente> getClientes() {
-		return this.clientes;
+	public Set<Compra> getCompras() {
+		return this.compras;
 	}
 
-	public void setClientes(Set<Cliente> clientes) {
-		this.clientes = clientes;
+	public void setCompras(Set<Compra> compras) {
+		this.compras = compras;
 	}
 
 }

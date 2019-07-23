@@ -1,17 +1,11 @@
 package edu.pe.unsch.entities;
-// Generated 25/06/2019 10:17:00 PM by Hibernate Tools 5.1.7.Final
+// Generated 22/07/2019 11:51:13 PM by Hibernate Tools 5.1.7.Final
 
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -22,19 +16,17 @@ import javax.persistence.Table;
 public class Cliente implements java.io.Serializable {
 
 	private Integer id;
-	private Usuario usuario;
+	private Integer idUsuario;
 	private String telefono;
 	private String direccion;
-	private Set<Compra> compras = new HashSet<Compra>(0);
 
 	public Cliente() {
 	}
 
-	public Cliente(Usuario usuario, String telefono, String direccion, Set<Compra> compras) {
-		this.usuario = usuario;
+	public Cliente(Integer idUsuario, String telefono, String direccion) {
+		this.idUsuario = idUsuario;
 		this.telefono = telefono;
 		this.direccion = direccion;
-		this.compras = compras;
 	}
 
 	@Id
@@ -49,14 +41,13 @@ public class Cliente implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_usuario")
-	public Usuario getUsuario() {
-		return this.usuario;
+	@Column(name = "id_usuario")
+	public Integer getIdUsuario() {
+		return this.idUsuario;
 	}
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public void setIdUsuario(Integer idUsuario) {
+		this.idUsuario = idUsuario;
 	}
 
 	@Column(name = "telefono")
@@ -75,15 +66,6 @@ public class Cliente implements java.io.Serializable {
 
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cliente")
-	public Set<Compra> getCompras() {
-		return this.compras;
-	}
-
-	public void setCompras(Set<Compra> compras) {
-		this.compras = compras;
 	}
 
 }

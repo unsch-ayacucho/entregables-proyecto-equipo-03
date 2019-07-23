@@ -620,7 +620,7 @@
             <tbody>
               <tr>
                 <td class="text-right"><strong>Sub-Total:</strong></td>
-                <td id="total" class="text-right"></td>
+                <td id="totalcart" class="text-right"></td>
               </tr>
               <tr>
                 <td class="text-right"><strong>Eco Tax:</strong></td>
@@ -632,7 +632,7 @@
               </tr>
               <tr>
                 <td class="text-right"><strong>Total:</strong></td>
-                <td  id="total1" class="text-right"></td>
+                <td  id="totalcart1" class="text-right"></td>
               </tr>
             </tbody>
           </table>
@@ -651,13 +651,17 @@
 			conDecimal = sum.toFixed(2);
 			console.log(conDecimal)
 		});
-		$('#total').html("$"+conDecimal);
-		$('#total1').html("$"+conDecimal);
+		conDecimal = (sum/2).toFixed(2);
+		$('#totalcart').html("$"+conDecimal);
+		$('#totalcart1').html("$"+conDecimal);
 		//document.getElementById("total");
 	  </script>
       <div class="buttons">
         <div class="pull-left"><a class="btn btn-default" th:href="@{/home/home}">Continue Shopping</a></div>
-        <div class="pull-right"><a class="btn btn-primary" th:href="@{/home/checkout}">Checkout</a></div>
+        <form method="post" th:action="@{/cart/checkout}">
+        
+        	<div class="pull-right"><input type="submit" class="btn btn-primary" value="Checkout"></div>
+        </form>
       </div>
     </div>
   </div>

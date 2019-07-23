@@ -7,4 +7,6 @@ public interface AccountService {
 	public void create(Usuario account);
 	
 	public Usuario login(String email, String password);
+	
+	public Usuario find(String email);
 }

@@ -1,5 +1,5 @@
 package edu.pe.unsch.entities;
-// Generated 25/06/2019 10:17:00 PM by Hibernate Tools 5.1.7.Final
+// Generated 22/07/2019 11:51:13 PM by Hibernate Tools 5.1.7.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -38,14 +38,13 @@ public class Producto implements java.io.Serializable {
 	private Float precio;
 	private Boolean oferta;
 	private Set<Detallecompra> detallecompras = new HashSet<Detallecompra>(0);
-	private Set<Cupon> cupons = new HashSet<Cupon>(0);
 
 	public Producto() {
 	}
 
 	public Producto(Categoria categoria, String nombre, String codigo, String descripcion, String imagen,
 			Boolean destacado, Boolean publico, Boolean existencia, Date creacion, Date ordenado, Float precio,
-			Boolean oferta, Set<Detallecompra> detallecompras, Set<Cupon> cupons) {
+			Boolean oferta, Set<Detallecompra> detallecompras) {
 		this.categoria = categoria;
 		this.nombre = nombre;
 		this.codigo = codigo;
@@ -59,7 +58,6 @@ public class Producto implements java.io.Serializable {
 		this.precio = precio;
 		this.oferta = oferta;
 		this.detallecompras = detallecompras;
-		this.cupons = cupons;
 	}
 
 	@Id
@@ -192,15 +190,6 @@ public class Producto implements java.io.Serializable {
 
 	public void setDetallecompras(Set<Detallecompra> detallecompras) {
 		this.detallecompras = detallecompras;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "producto")
-	public Set<Cupon> getCupons() {
-		return this.cupons;
-	}
-
-	public void setCupons(Set<Cupon> cupons) {
-		this.cupons = cupons;
 	}
 
 }

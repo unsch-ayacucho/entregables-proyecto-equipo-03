@@ -1,18 +1,12 @@
 package edu.pe.unsch.entities;
-// Generated 25/06/2019 10:17:00 PM by Hibernate Tools 5.1.7.Final
+// Generated 22/07/2019 11:51:13 PM by Hibernate Tools 5.1.7.Final
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -25,32 +19,30 @@ import javax.persistence.TemporalType;
 public class Cupon implements java.io.Serializable {
 
 	private Integer id;
-	private Producto producto;
 	private String nombre;
 	private String descripcion;
+	private Integer idProducto;
 	private Double valor;
 	private Integer tipo;
 	private Boolean estado;
 	private Date TComienzo;
 	private Date TFinal;
 	private Date creacion;
-	private Set<Compra> compras = new HashSet<Compra>(0);
 
 	public Cupon() {
 	}
 
-	public Cupon(Producto producto, String nombre, String descripcion, Double valor, Integer tipo, Boolean estado,
-			Date TComienzo, Date TFinal, Date creacion, Set<Compra> compras) {
-		this.producto = producto;
+	public Cupon(String nombre, String descripcion, Integer idProducto, Double valor, Integer tipo, Boolean estado,
+			Date TComienzo, Date TFinal, Date creacion) {
 		this.nombre = nombre;
 		this.descripcion = descripcion;
+		this.idProducto = idProducto;
 		this.valor = valor;
 		this.tipo = tipo;
 		this.estado = estado;
 		this.TComienzo = TComienzo;
 		this.TFinal = TFinal;
 		this.creacion = creacion;
-		this.compras = compras;
 	}
 
 	@Id
@@ -63,16 +55,6 @@ public class Cupon implements java.io.Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_producto")
-	public Producto getProducto() {
-		return this.producto;
-	}
-
-	public void setProducto(Producto producto) {
-		this.producto = producto;
 	}
 
 	@Column(name = "nombre", length = 200)
@@ -91,6 +73,15 @@ public class Cupon implements java.io.Serializable {
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+
+	@Column(name = "id_producto")
+	public Integer getIdProducto() {
+		return this.idProducto;
+	}
+
+	public void setIdProducto(Integer idProducto) {
+		this.idProducto = idProducto;
 	}
 
 	@Column(name = "valor", precision = 22, scale = 0)
@@ -148,15 +139,6 @@ public class Cupon implements java.io.Serializable {
 
 	public void setCreacion(Date creacion) {
 		this.creacion = creacion;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cupon")
-	public Set<Compra> getCompras() {
-		return this.compras;
-	}
-
-	public void setCompras(Set<Compra> compras) {
-		this.compras = compras;
 	}
 
 }

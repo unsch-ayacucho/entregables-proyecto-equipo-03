@@ -1,5 +1,5 @@
 package edu.pe.unsch.entities;
-// Generated 25/06/2019 10:17:00 PM by Hibernate Tools 5.1.7.Final
+// Generated 22/07/2019 11:51:13 PM by Hibernate Tools 5.1.7.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -25,22 +25,15 @@ import javax.persistence.TemporalType;
 public class Compra implements java.io.Serializable {
 
 	private Integer id;
-	private Cliente cliente;
-	private Cupon cupon;
-	private Estadoproductocompra estadoproductocompra;
-	private Metodopago metodopago;
+	private Usuario usuario;
 	private Date creacion;
 	private Set<Detallecompra> detallecompras = new HashSet<Detallecompra>(0);
 
 	public Compra() {
 	}
 
-	public Compra(Cliente cliente, Cupon cupon, Estadoproductocompra estadoproductocompra, Metodopago metodopago,
-			Date creacion, Set<Detallecompra> detallecompras) {
-		this.cliente = cliente;
-		this.cupon = cupon;
-		this.estadoproductocompra = estadoproductocompra;
-		this.metodopago = metodopago;
+	public Compra(Usuario usuario, Date creacion, Set<Detallecompra> detallecompras) {
+		this.usuario = usuario;
 		this.creacion = creacion;
 		this.detallecompras = detallecompras;
 	}
@@ -59,42 +52,12 @@ public class Compra implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_cliente")
-	public Cliente getCliente() {
-		return this.cliente;
+	public Usuario getUsuario() {
+		return this.usuario;
 	}
 
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_cupon")
-	public Cupon getCupon() {
-		return this.cupon;
-	}
-
-	public void setCupon(Cupon cupon) {
-		this.cupon = cupon;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_estado_producto_compra")
-	public Estadoproductocompra getEstadoproductocompra() {
-		return this.estadoproductocompra;
-	}
-
-	public void setEstadoproductocompra(Estadoproductocompra estadoproductocompra) {
-		this.estadoproductocompra = estadoproductocompra;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_metodo_pago")
-	public Metodopago getMetodopago() {
-		return this.metodopago;
-	}
-
-	public void setMetodopago(Metodopago metodopago) {
-		this.metodopago = metodopago;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)

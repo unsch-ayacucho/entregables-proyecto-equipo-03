@@ -1,15 +1,11 @@
 package edu.pe.unsch.entities;
-// Generated 25/06/2019 10:17:00 PM by Hibernate Tools 5.1.7.Final
+// Generated 22/07/2019 11:51:13 PM by Hibernate Tools 5.1.7.Final
 
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -21,14 +17,12 @@ public class Estadoproductocompra implements java.io.Serializable {
 
 	private Integer id;
 	private String nombre;
-	private Set<Compra> compras = new HashSet<Compra>(0);
 
 	public Estadoproductocompra() {
 	}
 
-	public Estadoproductocompra(String nombre, Set<Compra> compras) {
+	public Estadoproductocompra(String nombre) {
 		this.nombre = nombre;
-		this.compras = compras;
 	}
 
 	@Id
@@ -50,15 +44,6 @@ public class Estadoproductocompra implements java.io.Serializable {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "estadoproductocompra")
-	public Set<Compra> getCompras() {
-		return this.compras;
-	}
-
-	public void setCompras(Set<Compra> compras) {
-		this.compras = compras;
 	}
 
 }

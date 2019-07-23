@@ -1,6 +1,7 @@
 package edu.pe.unsch.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -10,9 +11,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import edu.pe.unsch.entities.Compra;
+import edu.pe.unsch.entities.Detallecompra;
 import edu.pe.unsch.entities.Item;
+import edu.pe.unsch.entities.Usuario;
+import edu.pe.unsch.service.AccountService;
+import edu.pe.unsch.service.OrdersDetailService;
+import edu.pe.unsch.service.OrdersService;
 import edu.pe.unsch.service.ProductoService;
 
 @Controller
@@ -21,6 +29,15 @@ public class CartController {
 	
 	@Autowired
 	private ProductoService productoService;
+	
+	@Autowired
+	private AccountService accountService;
+	
+	@Autowired
+	private OrdersService ordersService;
+	
+	@Autowired
+	private OrdersDetailService ordersDetailService;
 
 	@GetMapping("/")
 	public String cart (Model model) {
@@ -72,4 +89,40 @@ public class CartController {
 		}
 		return -1;
 	}
+	
+	@PostMapping("/checkout")
+	public String checkout(Model model, HttpSession session) {
+		model.addAttribute("titulo", "Checkout : e-commerce");
+		model.addAttribute("account", new Usuario());
+		if (session.getAttribute("email") == null) {
+			return "redirect:/account/login";
+		} 
+		else {
+			// Guardar Orden
+			Compra orders = new Compra();
+			Usuario account = accountService.find(session.getAttribute("email").toString());
+			System.out.println(session.getAttribute("email").toString());
+			orders.setUsuario(account);;
+			orders.setCreacion(new Date());
+			Compra newOrder = ordersService.create(orders);
+			// Guardar Detalle del orden
+			List<Item> cart = (List<Item>) session.getAttribute("cart");
+			for (Item item : cart) {
+				System.out.println("Orders detail " + newOrder.getId());
+				Detallecompra ordersdetail = new Detallecompra();
+				ordersdetail.setCompra(newOrder);
+				ordersdetail.setProducto(item.getProducto());
+				ordersdetail.setPrecio(item.getProducto().getPrecio());
+				ordersdetail.setCantidad(item.getCantidad());
+				ordersDetailService.create(ordersdetail);
+				}
+			// Limpiar carrito
+			session.removeAttribute("cart");
+			return "views/public/account/thanks";
+			}
+		}
+	
+	
+	
+	
 }
